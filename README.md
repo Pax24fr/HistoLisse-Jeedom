@@ -6,13 +6,12 @@ Histolisse est un plugin Jeedom permettant de lisser les données historiques de
 ## Installation
 1. Installez le plugin via le Market Jeedom.
 2. Activez le plugin dans la configuration.
-3. Configurez les commandes à lisser dans la section "Gestion des commandes".
 
 ## Prise en main
-1. Vérifiez avec **Diagnostic** que votre configuration est correcte et surveillez l'évolution.
+1. Vérifiez avec **Diagnostic** que votre configuration est correcte et surveillez l'évolution des tables, les lissages effectuées, gérez les données orphelines.
 2. Utilisez **Gestion des commandes** pour ajouter/retirer des commandes à lisser parmi celles déjà historisées dans Jeedom.
 3. Réglez vos heures de lissage via **Réglages des crons**.
-4. Activez les options de lissage dans **Réglages des commandes** (horaire, journalier, hebdomadaire, mensuel)
+4. Activez les options de lissage dans **Réglages des commandes** (horaire, journalier, hebdomadaire, mensuel) et configurez précisément le lissage (mode, arrondi, intervalle, fréquence non lissée, période...)
 
 ## REGLAGES CMD
 - Mode de lissage suivant le type de la commande (numeric, binary, autre).
@@ -21,11 +20,14 @@ Histolisse est un plugin Jeedom permettant de lisser les données historiques de
 - Maximum (garder la valeur la plus haute)
 - Valeur la plus proche (de la minute de l'intervalle)
 - Arrondi : Nombre de décimales, doit être inférieur ou égal à l'arrondi précédent
-- Intervalle en minutes entre les points lissés. ex. : 5 pour un point toutes les 5 minutes. Doit être supérieur ou égal à l'intervalle précédent
-- Âge des données Bloc non lissé : Les données traitées seront plus âgées que cette durée. ex : + de 4h => à 9h01 on lissera les données de 4h00 à 4h59, les dernières données entre 5h00 et 9h01 (bloc de 4h) ne seront pas encore lissées.
+- Intervalle en minutes entre les points lissés. 
+    ex. : 5 pour un point toutes les 5 minutes. Doit être égal ou supérieur à l'intervalle précédent
+- Âge des données (Bloc non lissé) : Les données traitées seront plus âgées que cette durée. 
+    ex1 : + de 4h => à 9h on lissera les données de 4h00 à 4h59, les dernières données entre 5h00 et 9h00 (bloc de 4h) ne seront pas encore lissées. 
+    ex2 : + de 1 minute => à 9h on lissera les données de 7h59 à 8h58
 - Jour (Début et) Fin de la plage de données à lisser à la date d'exécution programmée.
-- Début : calculé automatiquement (Fin -6 et -30).
-ex : -7 pour 1 semaine avant, -31 pour 1 mois avant. Doit être inférieur ou égal à -1 (conseillé -7 et -31)
+    Début : calculé automatiquement suvant le jour de Fin (-6 hebdo et -30 mensuel).
+    ex : -7 pour 1 semaine avant, -31 pour 1 mois avant. Doit être inférieur ou égal à -1 (conseillé -7 et -31)
 
 ## CRON
 - Heure d'exécution du lissage journalier (conseillé : 04h pour 04h01)
