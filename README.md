@@ -53,3 +53,4 @@ Histolisse est un plugin Jeedom permettant de lisser les données historiques de
 
 ## Support
 Créez un post sur le [Community Jeedom](https://community.jeedom.com/) pour toute question.
+Si vous constatez des incohérences dans les calculs ou affichages, désactivez ce plugin pour confirmer qu’il n’en est pas la cause.
