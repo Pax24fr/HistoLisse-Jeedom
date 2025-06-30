@@ -15,5 +15,4 @@
 - Ajout d'un cumul dans le totaliseur des lissages
 - Ajout du log/backup des commandes dans diagnostic
 - Ajout du log des lissages dans diagnostic
-- Ajout d'un log des opérations sql (visible en mode debug dans diagnostic)
 - Ajout visu+suppr des enregistrements rares (orphelins) dans diagnostic
