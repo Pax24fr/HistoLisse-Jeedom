@@ -2,12 +2,16 @@
 
 Bienvenue dans la documentation officielle du plugin Jeedom **HistoLisse**.
 
-## Fonctionnalités
+---
 
-- Lissage : horaire / journalier / hebdomadaire / mensuel
-- Sauvegardes JSON
-- Cron, debug, statistiques, diagnostic
+## 📚 Sommaire
+
+- [🔧 Installation](installation.md)
+- [⚙️ Fonctionnalités](fonctionnalites.md)
+- [❓ FAQ](faq.md)
+
+---
 
 ## Aperçu
 
-![exemple](img/exemple.png)
+![Exemple](img/exemple.png)
