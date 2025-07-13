@@ -6,4 +6,6 @@
 - Diagnostic de la base
 - Sauvegardes automatiques (fichiers JSON)
 - Interface Jeedom moderne
+
+
 [🔙 Retour au sommaire](index.md)
