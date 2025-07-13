@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="img/histolisse_icon.png" alt="HistoLisse Logo" width="200">
+</p>
+
 # 📘 Documentation du plugin HistoLisse
 
 Bienvenue dans la documentation officielle du plugin Jeedom **HistoLisse**.
