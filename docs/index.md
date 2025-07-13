@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img/histolisse_icon.png" alt="HistoLisse Logo" width="100">
+  <img src="img/histolisse_icon.png" alt="HistoLisse Logo" width="150">
 </p>
 
 # 📘 Documentation du plugin HistoLisse
