@@ -6,7 +6,7 @@
 
 - [🔧 Installation](installation.md)
 - [⚙️ Fonctionnalités](fonctionnalites.md)
-- [📘 Pas à pas ](détails.md)
+- [📘 Pas à pas ](details.md)
 - [❓ FAQ](faq.md)
 
 ---
