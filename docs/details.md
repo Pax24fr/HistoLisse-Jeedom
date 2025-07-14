@@ -12,11 +12,11 @@ Maintenant vous avez accès aux pages de réglages
 Jetez un oeil sur le résumé de la page diagnostic pour vérifier votre configuration et les commandes gourmandes
 ![dg-resumé](img/dg-res.png)
 
-## Lissages
+## lissages
 Régler les horaires de traitement via Réglage des Lissages
 ![crons](img/crons.png)
 
-## Gestion
+## gestion
 Commencez par ajouter des commandes, via la Gestion, qui seront désormais gérées par le plugin (sauf la purge qui reste gérée par Jeedom)
 ![gestion](img/gestion.png)
 
