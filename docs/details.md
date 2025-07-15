@@ -24,6 +24,7 @@ Comme partout dans le plugin les tables sont triables en cliquant sur les en-tê
 
 ## lissages
 ![crons](img/crons.png)
+
 Régler les horaires de traitement via Réglage des Lissages.  
 À chaque à chaque sauvegarde les dates de prochaine exécution sont mises à jour afin de contrôler que cela correspond à ce que vous voulez. Prenez en compte votre configuration Jeedom pour éviter les conflits de traitement et les lenteurs.
 
@@ -44,11 +45,15 @@ Les commandes de type numérique ont plus de possibilités.
 Retrouver pour chaque commande ses statistiques dans les 2 tables, les infos de base comme le délai avant la purge. La dernière valeur et sa date, en voir plus avec les 20 dernières valeurs dans chacune des tables. Un menu de navigation entre les commandes.
 
 Ici, vous réglez les lissages pour cette commande :
-- Son mode, c'est à dire la façon dont vont être agrégées les données (moyenne, maximum, minimum, etc). 
-- Le nombre de décimales pour l'arrondi. 
-- L'intervalle, c'est à dire le délai entre 2 points enregistrés. Retenez bien qu'un interalle d'1 minute donne 1440 enregistrement sur une seule journée. Le Plugin ne créera pas de données ! Donc si vous avez mis un intervalle par heure à 5 Min vous ne pouvez pas mettre un intervalle d'1 minute pour semaine, il sera forcément au moins égal à 5 Min ou plus.
-- Pour le lissage par heure, vous pouvez décider de ne pas lisser les dernières données qui ont moins de 1 minute, 10 minutes, 1 h etc, en réglant l'âge des données.
-- Pour les lissages, semaine, mois et année, il y a en plus le jour de fin à régler. Sachant que le jour de début de la plage sera automatiquement assigné en fonction du lissage. Les dates correspondantes sont indiquées en dessous à chaque fois que vous modifiez le jour de fin.
+- Son mode, c'est à dire la façon dont vont être agrégées les données (Moyenne des valeurs, Minimum : garder la valeur la plus basse, Maximum : la plus haute, Valeur la plus proche : de la minute de l'intervalle), suivant le type de la commande (numeric, binary, autre). 
+- Le nombre de décimales pour l'arrondi : doit être inférieur ou égal à l'arrondi du lissage précédent. 
+- L'intervalle, c'est à dire le nombre de minutes entre 2 points enregistrés. 
+ - Retenez bien qu'un interalle d'1 minute donne 1440 enregistrement sur une seule journée. 
+ - Le Plugin ne créera pas de données ! Donc si vous avez mis un intervalle par heure à 5 Min vous ne pouvez pas mettre un intervalle d'1 minute pour semaine, il sera forcément au moins égal à 5 Min ou plus.
+- Pour le lissage par heure, vous pouvez décider de ne pas lisser les dernières données qui ont moins de 1 minute, 10 minutes, 1 h etc, en réglant l'âge des données (Bloc non lissé) : Les données traitées seront plus âgées que cette durée. 
+ - Ex1 : + de 4h => à 9h on lissera les données de 4h00 à 4h59, les dernières données entre 5h00 et 9h00 (bloc de 4h) ne seront pas encore lissées. Ex2 : + de 1 minute => à 9h on lissera les données de 7h59 à 8h58 inclus.
+- Pour les lissages, semaine, mois et année, il y a en plus le jour de fin de la plage de données **à la date d'exécution programmée**. Sachant que le jour de début de la plage sera automatiquement assigné en fonction du lissage (-6 pour semaine, -30 pour mois et -365 pour année). Les dates correspondantes sont indiquées en dessous à chaque fois que vous modifiez le jour de fin. 
+ - Ex de jour Fin : -8 pour 1 semaine avant, -31 pour 1 mois avant. Doit être inférieur ou égal à -1.
 
 Si des lissages ne sont pas proposés, c'est en raison du délai de purge (par exemple, si purge=7 jours, vous ne verrez pas le lissage semaine).  
 En fonction des stats et infos, des conseils sont donnés par Hector.
