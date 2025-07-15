@@ -101,14 +101,25 @@ Voilà ! Vous avez nettoyé votre commande 85 (et d'autres) sur la période du 1
 
 ---
 
+### Je ne vois pas certains lissages pour une commande
+Les lissages ne sont visibles et activables que si le délai de purge de cette commande est supérieur à la période du lissage.  
+Par exemple délai de purge = 7 jours → les lissages Semaine et suivants ne seront pas visibles.
+
+---
+
 ### J'ai eu une panne de mon Jeedom pendant 2h ce jour, puis-je rattrapper les lissages Heure non faits ?
-Il n'est pas possible de rattraper ce qui n'a pas été fait. C'est pourquoi il est très important de configurer des lissages en cascade en ajoutant par exemple un lissage par jour en plus du lissage par heure et éventuellement un lissage par semaine même si c'est avec les mêmes paramètres (mode, arrondi, intervalle) afin d'être sûr que l'information soit au moins traitée une fois.
+Il n'est pas possible de rattraper ce qui n'a pas été fait. C'est pourquoi il est très important de configurer des lissages en cascade en ajoutant par exemple un lissage par jour en plus du lissage par heure et éventuellement un lissage par semaine même si c'est avec les mêmes paramètres (mode, arrondi, intervalle) afin d'être sûr que l'information soit au moins traitée une fois en cas de panne.
 
 ---
 
 ## Divers
 
+### Est-ce que je risque de perdre des données ?
+Il n'y a aucune raison de perdre des données de votre historique en dehors d'une mauvaise configuration de votre part dans le réglage de commande, par exemple vous avez saisi par erreur un intervalle de 600 au lieu de 60 minutes et donc vous n'avez plus qu'un point toutes les 10h au lieu d'un par heure.  
+Si vous vous en rendez compte rapidement, il reste la sauvegarde quotidienne de Jeedom pour restaurer votre base de données (en ne restaurant que les valeurs manquantes mais c'est assez technique).
+
 ### Où sont stockées les données ?
-→ Dans le dossier `data` du plugin, via des fichiers json qu'il est fortement conseillé de ne pas modifier !
+→ Dans le dossier `data` du plugin, via des fichiers json qu'il est fortement conseillé de ne pas modifier !  
+En cas de "problème", ils sont aussi dans la sauvegarde quotidienne de Jeedom, dans le répertoire data du plugin.
 
 [🔙 Retour au sommaire](index.md)
