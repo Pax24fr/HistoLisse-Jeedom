@@ -25,7 +25,7 @@
 - Le lissage par mois permet de supprimer des informations inutiles à long terme dans la table historyArch, exemple pour un voltage : 1 enregistrement par 6h pour les dates au delà de 6 mois.
 - Le lissage par année permet de supprimer des informations inutiles à long terme dans la table historyArch, exemple pour un voltage : 1 enregistrement par jour pour les dates au delà de 1 an.
 
-## et après ?
+### et après ?
 Consultez le mode d'emploi [📘 Pas à pas ](details.md)
 
 
