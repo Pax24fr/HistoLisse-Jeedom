@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="img/histolisse_icon.png" alt="HistoLisse Logo" width="150">
-</p>
+<img src="img/histolisse_icon.png" alt="HistoLisse Logo" width="150">
 
 # 📚 Sommaire
 
