@@ -13,19 +13,6 @@ Histolisse est un plugin Jeedom permettant de lisser les données historiques de
 3. Utilisez **Gestion des commandes** pour ajouter/retirer des commandes à lisser parmi celles déjà historisées dans Jeedom.
 4. Activez les options de lissage dans **Réglages des commandes** (heure, jour, semaine, mois, année) et configurez précisément le lissage (mode, arrondi, intervalle, fréquence non lissée, période...)
 
-## REGLAGE DES COMMANDES
-- Mode de lissage suivant le type de la commande (numeric, binary, autre).
-- Moyenne (des valeurs)
-- Minimum (garder la valeur la plus basse)
-- Maximum (garder la valeur la plus haute)
-- Valeur la plus proche (de la minute de l'intervalle)
-- Arrondi : Nombre de décimales, doit être inférieur ou égal à l'arrondi précédent
-- Intervalle en minutes entre les points lissés. Ex. : 5 pour un point toutes les 5 minutes. Doit être égal ou supérieur à l'intervalle précédent
-- Âge des données (Bloc non lissé) : Les données traitées seront plus âgées que cette durée. Ex1 : + de 4h => à 9h on lissera les données de 4h00 à 4h59, les dernières données entre 5h00 et 9h00 (bloc de 4h) ne seront pas encore lissées. Ex2 : + de 1 minute => à 9h on lissera les données de 7h59 à 8h58 inclus.
-- Jour (Début et) Fin de la plage de données à lisser à la date d'exécution programmée.
-    Début : calculé automatiquement suvant le jour de Fin (-6 pour semaine, -30 pour mois et -366 pour année).
-    ex : -8 pour 1 semaine avant, -31 pour 1 mois avant. Doit être inférieur ou égal à -1 (conseillé -7 et -31)
-
 ## EXECUTIONS
 - Heure d'exécution du lissage jour (conseillé : 01h pour 01h01)
 - Heure d'exécution du lissage semaine (conseillé : 03h pour 03h01)
