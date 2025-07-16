@@ -59,11 +59,13 @@ Ex de jour Fin : -8 pour 1 semaine avant, -31 pour 1 mois avant. Doit être inf�
 Si des lissages ne sont pas proposés, c'est en raison du délai de purge (par exemple, si purge=7 jours, vous ne verrez pas le lissage semaine).  
 En fonction des stats et infos, des conseils sont donnés par Hector.
 
-⚠️ *Vous aurez toujours des commandes en rouge ou en orange parce qu'il y a forcément des commandes avec plus de données que la moyenne. Cela reste une indication*.
+Un exemple complet de lissage par Année est détaillé dans la [FAQ](faq.md)
 
 ![cmdb](img/cmdb.png)
 Les commandes de type binaire sont limitées sur les modes.  
 Valeur la plus proche signifie au plus proche de l'intervalle : s'il est de 5 min on gardera les points à h00 h05 h10... c'est la donnée historisée le plus proche de cette minute qui sera donc conservée.
+
+⚠️ *Vous aurez toujours des commandes en rouge ou en orange parce qu'il y a forcément des commandes avec plus de données que la moyenne. Cela reste une indication pour comprende quelle commande sont à traiter en priorité.*
 
 ### détails
 ![dg-détails](img/dg-det.png)

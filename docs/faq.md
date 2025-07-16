@@ -19,6 +19,11 @@ Si vous n'avez rien configuré les 4320 sont transférés tel quels.
 
 ---
 
+### Quelle dervait être la taille de ma base de données ?
+Difficile de répondre à ça puisque ça dépend du nombre d'appareils que vous avez et du nombre de commandes historisées mais disons qu'en général une base Jeedom fera entre 30 et 50 Mo pour environ 200 commandes historisées parmi une cinquantaine d'équipements. La table history est autour de 5 à 10 Mo et la table historyArch entre 20 et 50 Mo. En tout état de cause si votre base de données dépasse les 200 Mo vous avez un sérieux problème de nettoyage à faire !
+
+---
+
 ### Quelle est la configuration idéale de Jeedom pour utiliser ce plugin ?
 Le mieux est de garder l'archivage à 02h00 avec un délai avant archivage de 2h. D'avoir la sauvegarde qui se lance à 05h25. À partir de là réglez les lissages pour que le jour se lance à 01h00 (avant l'archivage donc), la semaine à 03h00, le mois à 04h00 (avant la sauvegarde).  Pour l'année cela n'a pas trop d'importance, ça peut être 05h00 ou n'importe quelle autre heure disponible.  
 Eviter les configurations bizarres comme par exemple un délai d'archivage de 24h...
@@ -38,7 +43,6 @@ En traitant chaque heure ces commandes avec un intervalle à la minute on rédui
 Parfois sur ces commandes on a besoin de cette haute fréquence d'enregistrements pour faire des calculs en direct comme par exemple du délestage ou des choses comme ça. HistoLisse permet cela aussi via l'âge des données : On peut ne pas traiter la dernière minute ou les 10 dernières minutes etc d'une commande et donc à la fois réduire le nombre d'enregistrements de la journée tout en gardant une information précise en live.
 
 ---
-
 ## Les lissages
 
 ### Pourquoi les lissages ont lieu à hh:01 et pas à hh:00 ?
