@@ -16,7 +16,7 @@ Il y a aussi la possibilité d'ouvrir un nouveau sujet sur la section du forum J
 Jetez un oeil sur l'onglet résumé de la page **Diagnostic** pour vérifier votre configuration et les commandes gourmandes.  
 Vous retrouvez ici l'état des tables et leur évolution dans le temps. Ainsi qu'un résumé Top15 des commandes occupants le plus de place dans les tables history et historyArch.
 
-Quoi que vous fassiez, il y aura toujours des commandes avec un "volume élevé", c'est normal puisque ce volume est calculé par rapport à la moyenne.
+Quoi que vous fassiez, il y aura toujours des commandes avec un "volume élevé", c'est normal puisque ce volume est calculé par rapport à la moyenne générale.
 
 Comme partout dans le plugin les tables sont triables en cliquant sur les en-têtes de colonnes.
   
@@ -55,26 +55,28 @@ Retenez bien qu'un intervalle d'1 minute donne 1440 enregistrements sur une seul
  - Ex1 : + de 4h => à 9h on lissera les données de 4h00 à 4h59, les dernières données entre 5h00 et 9h00 (bloc de 4h) ne seront pas encore lissées. Ex2 : + de 1 minute => à 9h on lissera les données de 7h59 à 8h58 inclus.
 - Pour les lissages, semaine, mois et année, il y a en plus le **jour de fin** de la plage de données **à la date d'exécution programmée**. Sachant que le jour de début de la plage sera automatiquement assigné en fonction du lissage (-6 pour semaine, -30 pour mois et -365 pour année). Les dates correspondantes sont indiquées en dessous à chaque fois que vous modifiez le jour de fin.  
 Ex de jour Fin : -8 pour 1 semaine avant, -31 pour 1 mois avant. Doit être inférieur ou égal à -1.
+- En fonction des stats et infos, des conseils sont donnés par Hector.
 
-Si des lissages ne sont pas proposés, c'est en raison du délai de purge (par exemple, si purge=7 jours, vous ne verrez pas le lissage semaine).  
-En fonction des stats et infos, des conseils sont donnés par Hector.
+💡 *Si des lissages ne sont pas proposés, c'est en raison du délai de purge (par exemple, si purge=7 jours, vous ne verrez pas le lissage semaine).* 
 
-Un exemple complet de lissage par Année est détaillé dans la [FAQ](faq.md)
+Un exemple **complet** de lissage par Année est détaillé dans la [FAQ](faq.md)
 
 ![cmdb](img/cmdb.png)
-Les commandes de type binaire sont limitées sur les modes.  
-Valeur la plus proche signifie au plus proche de l'intervalle : s'il est de 5 min on gardera les points à h00 h05 h10... c'est la donnée historisée le plus proche de cette minute qui sera donc conservée.
+Les commandes de type binaire et string sont limitées sur les modes.  
+Valeur la plus proche signifie au plus proche de l'intervalle : s'il est de 5 min on gardera les points à h00 h05 h10... c'est la donnée historisée le plus proche de cette minute qui sera donc conservée.  
+Sauf exception, laissez Jeedom gérer ce type de commande, il le fait très bien.
 
 ⚠️ *Vous aurez toujours des commandes en rouge ou en orange parce qu'il y a forcément des commandes avec plus de données que la moyenne. Cela reste une indication pour comprende quelle commande sont à traiter en priorité.*
 
 ### détails
 ![dg-détails](img/dg-det.png)
 Via **Diagnostic** vous avez accès aux détails de toutes les commandes historisées.  
-Vous retrouverez la taille totale de tous les enregistrements et le détail par table, également les infos Jeedom et vous pouvez trier via les entêtes et filtrer.
+Vous retrouverez la taille totale de tous les enregistrements et le détail par table. Vous pouvez trier via les entêtes et filtrer.
 
 ### backups
 ![dg-backup](img/dg-back.png)
-Si vous avez fait une erreur vous pouvez voir et/ou restaurer un ancien réglage via Diagnostic → onglet Backups. Les backups sont gérés de façon incrémentielle mais il y aura toujours les 2 plus récents.
+Si vous avez fait une erreur vous pouvez voir et/ou restaurer un ancien réglage via Diagnostic → onglet Backups.  
+Les backups sont gérés de façon incrémentielle mais il y aura toujours les 2 plus récents.
 
 ### historique
 ![dg-lissage](img/dg-liss.png)

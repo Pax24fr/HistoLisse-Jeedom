@@ -27,7 +27,7 @@ Histolisse est un plugin Jeedom permettant de lisser les données historiques de
 - Le lissage par année permet de supprimer des informations inutiles à long terme dans la table historyArch, exemple pour un voltage : 1 enregistrement par jour pour les dates au delà de 1 an.
 
 ### PRÉ-REQUIS
-- Jeedom >= 4.0
+- Jeedom >= 4.0, php 7.3+
 - Vous devez avoir réglé la partie "Historique" de la configuration de la commande dans Jeedom pour qu'elle apparaisse dans "Gestion des commandes" :
     - Historiser doit être coché.
     - Mode de lissage Si défini (ex "Moyenne"), il sera remplacé par "Aucun" tant que la commande sera gérée par HistoLisse et reviendra à votre définition initiale si vous retirez la commande de cette gestion.
@@ -35,5 +35,7 @@ Histolisse est un plugin Jeedom permettant de lisser les données historiques de
     - Purger historique reste géré par Jeedom suivant votre réglage (7 jours, 3 mois etc.), est indiqué ici pour information.
 
 ### SUPPORT
-Créez un post sur le [Community Jeedom](https://community.jeedom.com/) pour toute question.
+[Documentation](https://pax24fr.github.io/HistoLisse-Jeedom/)  
+
+Créez un post sur le [Community Jeedom](https://community.jeedom.com/) avec le tag `plugin-histolisse` pour toute question.
 Si vous constatez des incohérences dans les calculs ou affichages, désactivez ce plugin pour confirmer qu’il n’en est pas la cause.

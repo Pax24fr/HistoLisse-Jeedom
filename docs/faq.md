@@ -13,36 +13,41 @@ Par exemple : une prise connectée indique le voltage actuel toutes les 20 secon
 - Chaque jour (par défaut à 2h00 : cron archive dans le moteur de tâches) Jeedom fait un `archivage` (ou *lissage de la nuit*) de cette table, c'est à dire qu'il transfère l'ensemble des données vers une seconde table : `historyArch` en appliquant un lissage si vous l'avez configuré (moyenne, minimum etc), qui ne garde alors que 1 seul enregistrement par heure, ce qui réduit à 24 au lieu de 4320 les enregistrements pour la commande voltage de la prise.  
 Si vous n'avez rien configuré les 4320 sont transférés tel quels.
 
-- 💡 L'archivage transfère **toutes** les données de la table history (les dernières 24h) comme il a lieu à 2h du matin ça inclue aussi les dernières données entre minuit et 2h00 sauf si vous avez réglé le délai avant archivage sur 2h (fortement conseillé dans réglages/système/configuration/équipements : Délai avant archivage) auquel cas il prendra bien tout de 0h00 à 23h59.
+💡 *L'archivage transfère **toutes** les données de la table history (les dernières 24h) comme il a lieu à 2h du matin ça inclue aussi les dernières données entre minuit et 2h00 sauf si vous avez réglé le délai avant archivage sur 2h (fortement conseillé dans réglages/système/configuration/équipements : Délai avant archivage) auquel cas il prendra bien tout de 0h00 à 23h59.*
 
 - Ensuite, en général à 05h25, Jeedom réalise une `sauvegarde` (cron backup dans le moteur de tâches) de tout votre Jeedom y compris la base de données, d'où l'importance de l'avoir traitée et réduite en taille avant cette heure là.
 
 ---
 
-### Quelle dervait être la taille de ma base de données ?
-Difficile de répondre à ça puisque ça dépend du nombre d'appareils que vous avez et du nombre de commandes historisées mais disons qu'en général une base Jeedom fera entre 30 et 50 Mo pour environ 200 commandes historisées parmi une cinquantaine d'équipements. La table history est autour de 5 à 10 Mo et la table historyArch entre 20 et 50 Mo. En tout état de cause si votre base de données dépasse les 200 Mo vous avez un sérieux problème de nettoyage à faire !
+### Quelle est la configuration idéale de Jeedom pour utiliser ce plugin ?
+Le mieux est de garder l'archivage à 02h00 avec un délai avant archivage de 2h. D'avoir la sauvegarde qui se lance à 05h25.  
+À partir de là réglez les lissages pour que le lissage Jour se lance à 01h00 (avant l'archivage donc), le Semaine à 03h00, le Mois à 04h00 (avant la sauvegarde).  Pour l'année cela n'a pas d'importance, ça peut être 05h00 ou n'importe quelle autre heure non utilisée.  
+Éviter les configurations bizarres comme par exemple un délai d'archivage de 24h...
 
 ---
 
-### Quelle est la configuration idéale de Jeedom pour utiliser ce plugin ?
-Le mieux est de garder l'archivage à 02h00 avec un délai avant archivage de 2h. D'avoir la sauvegarde qui se lance à 05h25. À partir de là réglez les lissages pour que le jour se lance à 01h00 (avant l'archivage donc), la semaine à 03h00, le mois à 04h00 (avant la sauvegarde).  Pour l'année cela n'a pas trop d'importance, ça peut être 05h00 ou n'importe quelle autre heure disponible.  
-Eviter les configurations bizarres comme par exemple un délai d'archivage de 24h...
+### Quelle devrait être la taille de ma base de données ?
+Difficile de répondre à ça puisque ça dépend du nombre d'appareils que vous avez et du nombre de commandes historisées ainsi que de l'ancienneté de votre Jeedom.  
+Disons qu'en général une base Jeedom fera entre 30 et 60 Mo pour 200 commandes historisées (environ 50 équipements y compris virtuels). La table history est autour de 5 à 10 Mo et la table historyArch entre 20 et 50 Mo.  
+En tout état de cause si votre base de données dépasse les 200 Mo vous avez un sérieux problème de nettoyage à faire !
 
 ---
 
 ### Quel est l'intérêt d'utiliser HistoLisse dans Jeedom ?
-Avec plus de 600 heures de développement il faut espérer qu'il y ait un véritable intérêt !  
+Avec plus de 700 heures de développement il faut espérer que ce plugin ait un véritable intérêt !  
 La problématique, comme expliqué plus haut, est que Jeedom ne propose que : de ne faire aucun lissage / ou bien de ne conserver qu'un seul enregistrement par heure. Dans le premier cas on a très vite une base de données énorme et dans le 2nd cas on peut manquer d'informations utiles à long terme.
 
-Pour beaucoup de commandes 1 enregistrement par heure est suffisant. Mais ça peut être frustrant quand il s'agit de commande qu'on veut comparer d'un mois ou année sur l'autre. Essentiellement toutes les commandes de consommation de courant ou de production solaire dont on veut garder un historique précis mais léger, toutes les 15 Min ou 30 Min pendant plusieurs mois. HistoLisse permet cela.  
+Pour beaucoup de commandes 1 enregistrement par heure est suffisant, c'est même trop à long terme. Mais ça peut être frustrant quand il s'agit de commande qu'on veut comparer d'un mois ou d'une année sur l'autre. Essentiellement toutes les commandes de consommation de courant ou de production solaire dont on veut garder un historique précis mais léger, toutes les 15 Min ou 30 Min pendant plusieurs mois. HistoLisse permet cela.  
 A l'inverse il permet aussi de ne garder qu'un enregistrement toutes les 6 heures, par exemple, sur du long terme soit 4 par jour au lieu de 24.
 
 L'autre intérêt est pour les commandes du genre Zigbee (sur courant) ou Téléinfo qui ont tendance à envoyer des données toutes les 2 à 8 secondes ce qui surcharge très vite les tables et ralentit d'autant l'affichage des graphiques.  
-En traitant chaque heure ces commandes avec un intervalle à la minute on réduit énormément la taille de la table history et donc le temps de chargement des graphiques.
+En traitant chaque heure ces commandes avec un intervalle à la minute on réduit énormément la taille de la table history et donc le temps de chargement des graphiques tout en conservant la possibilité ensuite de l'archiver par 15 ou 30min.
 
-Parfois sur ces commandes on a besoin de cette haute fréquence d'enregistrements pour faire des calculs en direct comme par exemple du délestage ou des choses comme ça. HistoLisse permet cela aussi via l'âge des données : On peut ne pas traiter la dernière minute ou les 10 dernières minutes etc d'une commande et donc à la fois réduire le nombre d'enregistrements de la journée tout en gardant une information précise en live.
+Parfois sur ces commandes on a besoin de cette haute fréquence d'enregistrements pour faire des calculs en direct comme par exemple du délestage ou des choses comme ça.  
+HistoLisse permet cela aussi via l'âge des données : On peut ne pas traiter la dernière minute ou les 10 dernières minutes etc d'une commande et donc à la fois réduire le nombre d'enregistrements de la journée tout en gardant une information très précise en live.
 
 ---
+
 ## Les lissages
 
 ### Pourquoi les lissages ont lieu à hh:01 et pas à hh:00 ?
@@ -58,24 +63,25 @@ On ne peut donc pas traiter par exemple 3 semaines d'un coup ou alors il faudrai
 
 ---
 
-### Le lissage par Année a-t-il un intérêt réel au quotidien ?
-Généralement non, mais il est utile dans certains cas précis. Vous aurez sans doute déjà un lissage par mois qui fera l'essentiel du travail de réduction des informations. De plus beaucoup de commandes ont une purge inférieure ou égale à 1 an et donc aucune raison de lisser par année. Par contre il peut vous permettre de traiter les quelques commandes avec une purge supérieure à 1 an ou sans purge.  
+### Le lissage par Année a-t-il un intérêt réel ?
+Généralement non. Vous aurez sans doute déjà un lissage par mois qui fera l'essentiel du travail de réduction des informations. De plus beaucoup de commandes ont une purge inférieure ou égale à 1 an et donc aucune raison de lisser par année. Par contre il peut vous permettre de traiter les quelques commandes avec une purge supérieure à 1 an ou sans purge.  
 
 Quand l'utiliser ?  
 Pour les commandes sans purge ou avec une purge > 1 an.  
 Lors de la première installation du plugin, pour optimiser les données archivées depuis longtemps.
 
-En effet, même s'il est prévu pour se lancer une fois par an, vous pouvez tout à fait le lancer plusieurs fois en changeant son heure/jour/mois d'exécution dans **Réglage des lissages** pour traiter par période d'un an vos anciennes données.
+En effet, même s'il est prévu pour se lancer une fois par an, vous pouvez tout à fait le lancer plusieurs fois en changeant son heure/jour/mois d'exécution dans **Réglage des lissages** pour traiter par plages d'1 an à la fois vos anciennes données.
 
 **Exemple :**  
 Vous avez une commande *85 Téléinfo-indexHP* lissée en mode maximum par Jeedom mais sans purge avec 4 ans de données dans la table historyArch (admettons qu'on a 4 années complètes de données dont 6 mois sur l'année en cours = 1 valeur/heure → ~35 000 points ).  
-Objectif : Réduire le nombre de points tout en conservant l’essentiel.
+Objectif : Réduire le nombre de points tout en conservant l’essentiel de l'information.
 
 - On est samedi 19 juillet 2025, il est 10h30 et vous venez juste d'installer le plugin.
 
 1. il est 10h30
+- Via la **Gestion des commandes** vous ajoutez la commande 85 à HistoLisse.
 - Dans le réglage des lissages vous enregistrez pour Année : **11h00, jour 19, mois 7** donc aujourd'hui à la prochaine heure.
-- Dans le réglage de la commande **85** vous activez le lissage Année en **mode maximum** (pour garder l'index le plus élevé par intervalle) avec un **arrondi à 0** (les index n'ont pas de décimale) et un **intervalle à 360min** (pour ne garder qu'une valeur toutes les 6 heures, c'est suffisant pour un index de 3 ans) et vous indiquez pour le **Jour Fin -1461** (1461 jours en arrière = 4 ans : valeur maximale autorisée) le jour début va se règler sur -1826 (5 ans) et les dates vous indiquent un traitement du 19 juillet 2020 0h00 au 19 juillet 2021 23h59.
+- Dans le réglage de la commande **85** vous activez le lissage Année en **mode maximum** (pour garder l'index le plus élevé par intervalle) avec un **arrondi à 0** (les index n'ont pas de décimale) et un **intervalle à 360min** (pour ne garder qu'une valeur toutes les 6 heures, c'est suffisant pour un index après 1 an) et vous indiquez pour le **Jour Fin -1461** (1461 jours en arrière = 4 ans : valeur maximale autorisée) le jour début va se règler sur -1826 (5 ans) et les dates vous indiquent un traitement du 19 juillet 2020 0h00 au 19 juillet 2021 23h59.
 - A 11h01 ce premier lissage par année est fait pour la commande 85 (et autres si configurées) vous pouvez vérifier dans Jeedom (graphique ou historique) que vous n'avez plus qu'une valeur toutes les 6 heures pour les enregistrements **avant** le 19 juillet 2021 23h59.
 
 2. il est 11h02
@@ -95,7 +101,7 @@ Objectif : Réduire le nombre de points tout en conservant l’essentiel.
 
 5. il est 14h02
 - Dans le réglage des lissages vous changez l'heure pour Année à 15h00.
-- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -200** (pour finir au 31/12/24) et les dates vous indiquent désormais un traitement du 1 janvier 2024 0h00 au 31 décembre 2024 23h59. (NB: Les enregistrements entre 1 janvier 2024 et le 21 juillet 2024 seront vérifiés en doublon de l'étape 4 mais ce n'est pas un problème.)
+- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -200** (pour finir au 31/12/24) et les dates vous indiquent désormais un traitement du 1 janvier 2024 0h00 au 31 décembre 2024 23h59. *(NB: Les enregistrements entre 1 janvier 2024 et le 21 juillet 2024 seront vérifiés en doublon de l'étape 4 mais ce n'est pas un problème.)*
 - A 15h01 ce 5ème lissage est fait.
 
 6. il est 15h02  
@@ -107,12 +113,20 @@ Voilà ! Vous avez nettoyé votre commande 85 (et d'autres) sur la période du 1
 
 ### Je ne vois pas certains lissages pour une commande
 Les lissages ne sont visibles et activables que si le délai de purge de cette commande est supérieur à la période du lissage.  
-Par exemple délai de purge = 7 jours → les lissages Semaine et suivants ne seront pas visibles.
+Par exemple si le délai avant purge = 7 jours → les lissages Semaine et suivants ne seront pas visibles.
+
+---
+
+### Combien de temps dure un lissage ?
+Un certain temps... Là encore difficile de donner une règle, tout dépend de votre matériel, de l'occupation de Jeedom à ce moment là etc...  
+Sur un "vieux" RPI 3b+ avec 2Go de mémoire, il faut compter un peu moins de 3 secondes pour traiter 10 000 enregistrements sur une vingtaine de commandes.  
+Bien souvent le lissage de chaque heure va durer entre 1 et 2 dixièmes de secondes par commande à traiter suivant son volume de données. Un lissage Mois qui traiterait 100 000 lignes durera moins de 20 secondes.  
+En imaginant, cas exceptionnel et déconseillé, qu'on a sous gestion Histolisse 200 commandes on serait donc autour de 30 secondes chaque heure et 3 minutes sur un lissage Mois.
 
 ---
 
 ### J'ai eu une panne de mon Jeedom pendant 2h ce jour, puis-je rattrapper les lissages Heure non faits ?
-Il n'est pas possible de rattraper ce qui n'a pas été fait. C'est pourquoi il est très important de configurer des lissages en cascade en ajoutant par exemple un lissage par jour en plus du lissage par heure et éventuellement un lissage par semaine même si c'est avec les mêmes paramètres (mode, arrondi, intervalle) afin d'être sûr que l'information soit au moins traitée une fois en cas de panne.
+Il n'est pas possible de rattraper ce qui n'a pas été fait. C'est pourquoi il est très important de configurer des lissages en cascade en ajoutant par exemple un lissage par jour en plus du lissage par heure et éventuellement un lissage par semaine même si c'est avec les *mêmes paramètres* (mode, arrondi, intervalle) afin d'être sûr que l'information soit au moins traitée une fois en cas de panne, mieux vaut rester attentif quand vous modifez les rélages de la commande !
 
 ---
 
@@ -123,7 +137,7 @@ Il n'y a aucune raison de perdre des données de votre historique en dehors d'un
 Si vous vous en rendez compte rapidement, il reste la sauvegarde quotidienne de Jeedom pour restaurer votre base de données (en ne restaurant que les valeurs manquantes mais c'est assez technique).
 
 ### Où sont stockées les données ?
-→ Dans le dossier `data` du plugin, via des fichiers json qu'il est fortement conseillé de ne pas modifier !  
+→ Dans le dossier `data` du plugin, via des fichiers json qu'il est fortement conseillé de **ne pas modifier** !  
 En cas de "problème", ils sont aussi dans la sauvegarde quotidienne de Jeedom, dans le répertoire data du plugin.
 
 [🔙 Retour au sommaire](index.md)
