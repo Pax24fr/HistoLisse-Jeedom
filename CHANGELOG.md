@@ -1,12 +1,12 @@
 # CHANGELOG
 
-## [1.0.0] - 2025-07-15
-- 1ère Version Stable
+## [1.1] - 2025-07-17
 
 ### Ajouts
-- correction de la date pour Année dans le réglage des Lissages
+- Modification de la page principale pour afficher l'état des tables en temps réel, le dernier lissage et les Tops commandes (cache diagnostic)
 
 ### Ajouts précédents
+- 2025-07-15 1ère Version Stable
 - lissage par année
 - compatibilité php7.3+
 - Hector et ses synonymes
