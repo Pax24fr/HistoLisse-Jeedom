@@ -20,15 +20,14 @@ Si vous n'avez rien configuré les 4320 sont transférés tel quels.
 ---
 
 ### Quelle est la configuration idéale de Jeedom pour utiliser ce plugin ?
-Le mieux est de garder l'archivage à 02h00 avec un délai avant archivage de 2h. D'avoir la sauvegarde qui se lance à 05h25.  
-À partir de là réglez les lissages pour que le lissage Jour se lance à 01h00 (avant l'archivage donc), le Semaine à 03h00, le Mois à 04h00 (avant la sauvegarde).  Pour l'année cela n'a pas d'importance, ça peut être 05h00 ou n'importe quelle autre heure non utilisée.  
+Le mieux est de garder l'archivage à 02h00 mais avec un délai avant archivage de 2h et d'avoir la sauvegarde qui se lance à 05h25.  
 Éviter les configurations bizarres comme par exemple un délai d'archivage de 24h...
 
 ---
 
 ### Quelle devrait être la taille de ma base de données ?
 Difficile de répondre à ça puisque ça dépend du nombre d'appareils que vous avez et du nombre de commandes historisées ainsi que de l'ancienneté de votre Jeedom.  
-Disons qu'en général une base Jeedom fera entre 30 et 60 Mo pour 200 commandes historisées (environ 50 équipements y compris virtuels). La table history est autour de 5 à 10 Mo et la table historyArch entre 20 et 50 Mo.  
+Disons qu'en général, pour 70 équipements et 200 commandes historisées, une base Jeedom fera entre 30 et 60 Mo avec la table history  autour de 5 à 10 Mo et la table historyArch entre 20 et 50 Mo.  
 En tout état de cause si votre base de données dépasse les 200 Mo vous avez un sérieux problème de nettoyage à faire !
 
 ---
@@ -38,28 +37,38 @@ Avec plus de 700 heures de développement il faut espérer que ce plugin ait un 
 La problématique, comme expliqué plus haut, est que Jeedom ne propose que : de ne faire aucun lissage / ou bien de ne conserver qu'un seul enregistrement par heure. Dans le premier cas on a très vite une base de données énorme et dans le 2nd cas on peut manquer d'informations utiles à long terme.
 
 Pour beaucoup de commandes 1 enregistrement par heure est suffisant, c'est même trop à long terme. Mais ça peut être frustrant quand il s'agit de commande qu'on veut comparer d'un mois ou d'une année sur l'autre. Essentiellement toutes les commandes de consommation de courant ou de production solaire dont on veut garder un historique précis mais léger, toutes les 15 Min ou 30 Min pendant plusieurs mois. HistoLisse permet cela.  
-A l'inverse il permet aussi de ne garder qu'un enregistrement toutes les 6 heures, par exemple, sur du long terme soit 4 par jour au lieu de 24.
+A l'inverse, 1 par heure peut-être trop à long terme, HistoLisse permet aussi, par exemple, de ne garder qu'un enregistrement toutes les 6 heures sur du long terme (+ de 3 mois) soit 4 par jour au lieu de 24.
 
-L'autre intérêt est pour les commandes du genre Zigbee (sur courant) ou Téléinfo qui ont tendance à envoyer des données toutes les 2 à 8 secondes ce qui surcharge très vite les tables et ralentit d'autant l'affichage des graphiques.  
-En traitant chaque heure ces commandes avec un intervalle à la minute on réduit énormément la taille de la table history et donc le temps de chargement des graphiques tout en conservant la possibilité ensuite de l'archiver par 15 ou 30min.
+L'autre intérêt est pour les commandes du genre Zigbee (sur courant) ou Téléinfo qui ont tendance à envoyer des données toutes les 1 à 10 secondes ce qui surcharge très vite les tables et ralentit d'autant l'affichage des graphiques.  
+En traitant à chaque heure ces commandes avec un intervalle à la minute on réduit énormément la taille de la table history et donc le temps de chargement des graphiques tout en conservant la possibilité ensuite de l'archiver par 15 ou 30min.
 
-Parfois sur ces commandes on a besoin de cette haute fréquence d'enregistrements pour faire des calculs en direct comme par exemple du délestage ou des choses comme ça.  
-HistoLisse permet cela aussi via l'âge des données : On peut ne pas traiter la dernière minute ou les 10 dernières minutes etc d'une commande et donc à la fois réduire le nombre d'enregistrements de la journée tout en gardant une information très précise en live.
+Parfois sur ces commandes on a besoin de cette haute fréquence d'enregistrements pour faire des calculs en direct comme par exemple du délestage, des moyennes sur 1 ou 10min ou des choses comme ça.  
+HistoLisse permet cela aussi via l'âge des données : On peut ne pas traiter la dernière minute (options jusqu'à 2 dernières heures)d'une commande et donc à la fois réduire le nombre d'enregistrements de la journée tout en gardant une information très précise en live.
 
 ---
 
 ## Les lissages
 
+### Comment marchent les périodes de lissage ?
+Les lissages fonctionnent avec leur période de traitement correspondante : d'une heure, un jour, une semaine, un mois, une année à la fois.  
+On ne peut donc pas traiter par exemple 3 semaines d'un coup ou alors il faudrait ensuite attendre 3 semaines avant de retraiter la commande, ce serait trop complexe à gérer avec des traitements en doublon.
+
+------
+
+### A quelle heure programmer mes lissages ?
+Tout dépend de votre configuration Jeedom mais si elle correspond à la configuration idéale donnée plus haut alors :
+- réglez les lissages pour que le Jour se lance à 01h (avant l'archivage), le Semaine à 03h, le Mois à 04h (avant la sauvegarde). Pour l'année, peu d'importance, ça peut être 05h ou n'importe quelle autre heure non utilisée.  
+- lissage par Mois le plus simple pour le Jour du mois d'exécution c'est le 1er du mois. Si malgré tout vous choisissez le 29, 30, 31 il sera executé le dernier jour du mois si moins de jours que la date indiquée.
+- lissage par Année le plus simple est bien sûr de choisir le 1/1 afin de traiter une année complête.
+Règle générale : choisissez des heures différentes pour chaque lissage et qui ne soit pas celles de l'archivage ni de la sauvegarde Jeedom.  
+Pour le Jour, si vous uilisez l'âge des données, il n'en tiendra pas compte, donc il faut le programmer au moins 1h après l'heure de la dernière donnée qui sera traitée par l'archivage (si configuration idéale = Jour à 1h).
+
+---
+
 ### Pourquoi les lissages ont lieu à hh:01 et pas à hh:00 ?
 A l'heure pile Jeedom effectue tout un tas de tâches et de crons. Votre matériel est alors très sollicité en mémoire et processeur.  
 Même si les lissages ne durent que quelques secondes, il est plus efficace de les décaler d'une minute pour ne pas surcharger votre matériel.  
 Pour autant même s'il s'exécute à hh:01, le lissage Heure traite bien les données de l'heure précédente entre hh:00 et hh:59 inclus.
-
----
-
-### Comment marchent les périodes de lissage ?
-Les lissages fonctionnent avec leur période de traitement correspondante : d'une heure, un jour, une semaine, un mois, une année à la fois.  
-On ne peut donc pas traiter par exemple 3 semaines d'un coup ou alors il faudrait ensuite attendre 3 semaines avant de retraiter la commande, ce serait trop complexe à gérer avec des traitements en doublon.
 
 ---
 
@@ -118,10 +127,9 @@ Par exemple si le délai avant purge = 7 jours → les lissages Semaine et suiva
 ---
 
 ### Combien de temps dure un lissage ?
-Un certain temps... Là encore difficile de donner une règle, tout dépend de votre matériel, de l'occupation de Jeedom à ce moment là etc...  
+Un certain temps... Difficile de donner une règle, tout dépend de votre matériel, de l'occupation de Jeedom à ce moment là etc...  
 Sur un "vieux" RPI 3b+ avec 2Go de mémoire, il faut compter un peu moins de 3 secondes pour traiter 10 000 enregistrements sur une vingtaine de commandes.  
-Bien souvent le lissage de chaque heure va durer entre 1 et 2 dixièmes de secondes par commande à traiter suivant son volume de données. Un lissage Mois qui traiterait 100 000 lignes durera moins de 20 secondes.  
-En imaginant, cas exceptionnel et déconseillé, qu'on a sous gestion Histolisse 200 commandes on serait donc autour de 30 secondes chaque heure et 3 minutes sur un lissage Mois.
+En général, le lissage de chaque heure va durer entre 1 et 2 dixièmes de secondes par commande à traiter suivant son volume de données (0 à 1000). Un lissage Mois qui traite 100 000 lignes dure moins de 20 secondes.  
 
 ---
 
