@@ -1,11 +1,14 @@
 # CHANGELOG
 
-## [1.1] - 2025-07-17
+## [1.2] - 2025-07-25
 
 ### Ajouts
-- Modification de la page principale pour afficher l'état des tables en temps réel, le dernier lissage et les Tops commandes (cache diagnostic)
+- diverses optimisations et améliorations pages gestion, diagnostic et internes
+
+
 
 ### Ajouts précédents
+- page principale : afficher l'état des tables en temps réel, le dernier lissage et les Tops commandes (cache)
 - 2025-07-15 1ère Version Stable
 - lissage par année
 - compatibilité php7.3+
