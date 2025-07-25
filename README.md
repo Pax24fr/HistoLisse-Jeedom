@@ -6,6 +6,7 @@ Histolisse est un plugin Jeedom permettant de lisser les données historiques de
 ## INSTALLATION
 1. Installez le plugin via le Market Jeedom.
 2. Activez le plugin dans la configuration.
+3. en option il est conseillé d'installer mon plugin Post_It gratuit pour noter des aides mémoire depuis la page diagnostic par exemple.
 
 ## PRISE EN MAIN
 1. Vérifiez avec **Diagnostic** que votre configuration est correcte et surveillez l'évolution des tables, les lissages effectuées, gérez les données orphelines.

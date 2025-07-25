@@ -7,7 +7,7 @@
 - Interface Jeedom moderne
 
 ## PRISE EN MAIN
-1. Vérifiez avec **Diagnostic** que votre configuration est correcte et surveillez l'évolution des tables, les lissages effectués, gérez les données orphelines.
+1. Vérifiez avec **Diagnostic** que votre configuration est correcte et surveillez l'évolution des tables, les lissages effectués, gérez les données orphelines (en option il est conseillé d'installer mon plugin Post_It gratuit pour noter des aides mémoire depuis la page diagnostic par exemple).
 2. Réglez vos heures de lissage via **Réglage des Lissages**.
 3. Utilisez **Gestion des commandes** pour ajouter/retirer des commandes à lisser parmi celles déjà historisées dans Jeedom.
 4. Activez les options de lissage dans **Réglages des commandes** (heure, jour, semaine, mois, année) et configurez précisément le lissage (mode, arrondi, intervalle, fréquence non lissée, période...)

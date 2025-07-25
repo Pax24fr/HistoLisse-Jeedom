@@ -76,7 +76,7 @@ Vous retrouverez la taille totale de tous les enregistrements et le détail par 
 ### backups
 ![dg-backup](img/dg-back.png)
 Si vous avez fait une erreur vous pouvez voir et/ou restaurer un ancien réglage via Diagnostic → onglet Backups.  
-Les backups sont gérés de façon incrémentielle mais il y aura toujours les 2 plus récents.
+Les backups sont gérés de façon incrémentielle (garde les 2 derniers + 1 toutes les 2 heures du jour / le plus ancien de la veille, des 5 10 et 30 derniers jours / 1 par mois année en cours / 1 par an).
 
 ### historique
 ![dg-lissage](img/dg-liss.png)
