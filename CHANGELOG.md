@@ -1,11 +1,12 @@
 # CHANGELOG
 
-## [1.2] - 2025-07-25
+## [1.3] - 2025-08-12
 
 ### Ajouts
-- diverses optimisations et améliorations pages gestion, diagnostic et internes
-
-
+- dans **Réglage des lissages** ajout d'un bouton de dérogation "Lancer immédiatement" pour chaque période qui permet de lancer un lissage général en dehors des horaires prévus et pour toutes les commandes qui ont un réglage activé pour cette période.
+- dans **Réglage des commandes** ajout d'un bouton de dérogation "Lancer immédiatement tous ces lissages" qui permet de lancer tous les lissages activés et pour cette commande uniquement, en dehors des horaires prévus.
+- correction d'un bug d'url trop longue qui empêchait l'accès aux réglages en cas de nombreuses commandes gérées (+ de 100).
+- diverses corrections et optimisations mineures.
 
 ### Ajouts précédents
 - page principale : afficher l'état des tables en temps réel, le dernier lissage et les Tops commandes (cache)

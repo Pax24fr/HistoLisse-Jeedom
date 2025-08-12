@@ -77,46 +77,44 @@ Généralement non. Vous aurez sans doute déjà un lissage par mois qui fera l'
 
 Quand l'utiliser ?  
 Pour les commandes sans purge ou avec une purge > 1 an.  
-Lors de la première installation du plugin, pour optimiser les données archivées depuis longtemps.
+Lors de la première installation du plugin, pour lisser les données archivées depuis longtemps.
 
 En effet, même s'il est prévu pour se lancer une fois par an, vous pouvez tout à fait le lancer plusieurs fois en changeant son heure/jour/mois d'exécution dans **Réglage des lissages** pour traiter par plages d'1 an à la fois vos anciennes données.
 
 **Exemple :**  
-Vous avez une commande *85 Téléinfo-indexHP* lissée en mode maximum par Jeedom mais sans purge avec 4 ans de données dans la table historyArch (admettons qu'on a 4 années complètes de données dont 6 mois sur l'année en cours = 1 valeur/heure → ~35 000 points ).  
+Vous avez une commande *85 Téléinfo-indexHP* lissée en mode **maximum** par Jeedom mais __sans purge__ avec 4 ans de données dans la table historyArch (admettons qu'on a 4 années complètes de données dont 6 mois sur l'année en cours = 1 valeur/heure → ~35 000 points ).  
 Objectif : Réduire le nombre de points tout en conservant l’essentiel de l'information.
 
-- On est samedi 19 juillet 2025, il est 10h30 et vous venez juste d'installer le plugin.
+- Vous venez juste d'installer le plugin.
 
-1. il est 10h30
+1.  
 - Via la **Gestion des commandes** vous ajoutez la commande 85 à HistoLisse.
-- Dans le réglage des lissages vous enregistrez pour Année : **11h00, jour 19, mois 7** donc aujourd'hui à la prochaine heure.
-- Dans le réglage de la commande **85** vous activez le lissage Année en **mode maximum** (pour garder l'index le plus élevé par intervalle) avec un **arrondi à 0** (les index n'ont pas de décimale) et un **intervalle à 360min** (pour ne garder qu'une valeur toutes les 6 heures, c'est suffisant pour un index après 1 an) et vous indiquez pour le **Jour Fin -1461** (1461 jours en arrière = 4 ans : valeur maximale autorisée) le jour début va se règler sur -1826 (5 ans) et les dates vous indiquent un traitement du 19 juillet 2020 0h00 au 19 juillet 2021 23h59.
-- A 11h01 ce premier lissage par année est fait pour la commande 85 (et autres si configurées) vous pouvez vérifier dans Jeedom (graphique ou historique) que vous n'avez plus qu'une valeur toutes les 6 heures pour les enregistrements **avant** le 19 juillet 2021 23h59.
+- Dans le réglage des lissages vous enregistrez pour Année : **06h00, jour 1, mois 1** donc exécution le 1er janvier de chaque année à 6h.
+- Dans le réglage de la commande **85** vous activez (de préférence uniquement) le lissage Année en **mode maximum** (pour garder l'index le plus élevé par intervalle) avec un **arrondi à 0** (les index n'ont pas de décimale) et un **intervalle à 360min** (pour ne garder qu'une valeur toutes les 6 heures, c'est suffisant pour un index après 1 an) et vous indiquez pour le **Jour Fin -1461** (1461 jours en arrière = 4 ans : valeur maximale autorisée) le jour début va se règler sur -1826 (5 ans) et vous sauvegardez.
+- Vous cliquez sur le bouton "Lancer ces lissages immédiatement". Ce premier lissage par année est fait pour la commande 85 vous pouvez vérifier dans Jeedom (graphique ou historique) que vous n'avez plus qu'une valeur toutes les 6 heures pour les enregistrements **entre 5 et 4 ans avant** aujourd'hui.
 
-2. il est 11h02
-- Dans le réglage des lissages vous changez l'heure pour Année à 12h00.
-- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -1095** (3 ans) et les dates vous indiquent désormais un traitement du 20 juillet 2021 0h00 au 20 juillet 2022 23h59.
-- A 12h01 ce second lissage par année est fait.
+2.  
+- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -1095** (3 ans).
+- Vous cliquez sur le bouton "Lancer ces lissages immédiatement". Ce second lissage par année est fait pour la commande 85 pour les enregistrements **entre 4 et 3 ans avant** aujourd'hui.
 
-3. il est 12h02
-- Dans le réglage des lissages vous changez l'heure pour Année à 13h00.
-- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -729** (2 ans) et les dates vous indiquent désormais un traitement du 21 juillet 2022 0h00 au 21 juillet 2023 23h59.
-- A 13h01 ce 3ème lissage est fait.
+3.  
+- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -729** (2 ans).
+- Vous cliquez sur le bouton "Lancer ces lissages immédiatement". Ce 3ème lissage par année est fait pour la commande 85 pour les enregistrements **entre 3 et 2 ans avant** aujourd'hui.
 
-4. il est 13h02
-- Dans le réglage des lissages vous changez l'heure pour Année à 14h00.
-- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -363** (2 ans) et les dates vous indiquent désormais un traitement du 22 juillet 2023 0h00 au 21 juillet 2024 23h59.
-- A 14h01 ce 4ème lissage est fait.
+4.  
+- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -363** (1 ans).
+- Vous cliquez sur le bouton "Lancer ces lissages immédiatement". Ce 4ème lissage par année est fait pour la commande 85 pour les enregistrements **entre 2 et 1 an avant** aujourd'hui.
 
-5. il est 14h02
-- Dans le réglage des lissages vous changez l'heure pour Année à 15h00.
-- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -200** (pour finir au 31/12/24) et les dates vous indiquent désormais un traitement du 1 janvier 2024 0h00 au 31 décembre 2024 23h59. *(NB: Les enregistrements entre 1 janvier 2024 et le 21 juillet 2024 seront vérifiés en doublon de l'étape 4 mais ce n'est pas un problème.)*
-- A 15h01 ce 5ème lissage est fait.
+5.  
+- Vérifiez le numéro du jour d'aujourd'hui, par exemple si nous sommes le 1er juillet 2025 c'est le 182ème jour de l'année.
+- Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -182** (pour finir au 31/12/24). *(NB: Les enregistrements entre 1 janvier 2024 et le 1 juillet 2024 seront vérifiés en doublon de l'étape 4 mais ce n'est pas un problème.)*
+- Vous cliquez sur le bouton "Lancer ces lissages immédiatement". Ce 5ème lissage par année est fait pour la commande 85 pour les enregistrements jusqu'au 31 décembre dernier.
 
-6. il est 15h02  
-Voilà ! Vous avez nettoyé votre commande 85 (et d'autres) sur la période du 19 juillet 2020 au 31 décembre 2024. Les ~35 000 enregistrements sur 4 ans (dont 6 mois sur l'année en cours) sont devenus 9424 (73% de réduction) répartis en : 5104 (1 toutes les 6h) sur 3,5 ans et 4320 (1 par heure) pour les 6 mois de l'année en cours non traitée. Ces lissages ont divisé par 4 le nombre d'enregistrements sans perte des informations utiles.
-- Dans le réglage des lissages vous choisissez maintenant votre vraie date pour le lissage Année : **05h00, jour 1, mois 1** soit un prochain lissage le 1er janvier 2026 à 5h du matin.
+6.  
+Voilà ! Vous avez nettoyé votre commande 85 sur la période du 1er juillet 2020 au 31 décembre 2024. Les ~35 000 enregistrements sur 4 ans (dont 6 mois sur l'année en cours) sont devenus 9424 (73% de réduction) répartis en : 5104 (1 toutes les 6h) sur 3,5 ans et 4320 (1 par heure) pour les 6 mois de l'année en cours non traitée. Ces lissages ont divisé par 4 le nombre d'enregistrements sans perte des informations utiles.
 - Dans le réglage de la commande **85** vous changez le lissage Année en indiquant pour le **Jour Fin -1** et les dates vous indiquent désormais un traitement (qui aura lieu le 1er janvier 2026) du 31 décembre 2024 0h00 au 31 décembre 2025 23h59.
+
+Si vous voulez traiter plusieurs commandes à la fois, alors commencez par régler le lissage année pour chaque commande puis aller dans **Réglage des lissages** et cliquez sur le bouton "Lancer immédiatement" en face de Année. Le lissage par année se lancera pour toutes les commandes réglées.
 
 ---
 
@@ -128,13 +126,14 @@ Par exemple si le délai avant purge = 7 jours → les lissages Semaine et suiva
 
 ### Combien de temps dure un lissage ?
 Un certain temps... Difficile de donner une règle, tout dépend de votre matériel, de l'occupation de Jeedom à ce moment là etc...  
-Sur un "vieux" RPI 3b+ avec 2Go de mémoire, il faut compter un peu moins de 3 secondes pour traiter 10 000 enregistrements sur une vingtaine de commandes.  
+Sur un "vieux" RPI 3b+ avec 2Go de mémoire, il faut compter un peu moins de 3 secondes pour traiter 10 000 enregistrements réparties sur une vingtaine de commandes.  Un RPI 4 avec 8Go peut traiter 100 000 enregistrements à la seconde.
 En général, le lissage de chaque heure va durer entre 1 et 2 dixièmes de secondes par commande à traiter suivant son volume de données (0 à 1000). Un lissage Mois qui traite 100 000 lignes dure moins de 20 secondes.  
 
 ---
 
 ### J'ai eu une panne de mon Jeedom pendant 2h ce jour, puis-je rattrapper les lissages Heure non faits ?
-Il n'est pas possible de rattraper ce qui n'a pas été fait. C'est pourquoi il est très important de configurer des lissages en cascade en ajoutant par exemple un lissage par jour en plus du lissage par heure et éventuellement un lissage par semaine même si c'est avec les *mêmes paramètres* (mode, arrondi, intervalle) afin d'être sûr que l'information soit au moins traitée une fois en cas de panne, mieux vaut rester attentif quand vous modifez les rélages de la commande !
+Il n'est pas possible de rattraper ce qui n'a pas été fait. C'est pourquoi il est très important de configurer des lissages en cascade en ajoutant par exemple un lissage par jour en plus du lissage par heure et éventuellement un lissage par semaine même si c'est avec les *mêmes paramètres* (mode, arrondi, intervalle) afin d'être sûr que l'information soit au moins traitée une fois en cas de panne, mieux vaut rester attentif quand vous modifez les réglages de la commande !
+En dehors du lissage heure, si vous vous rendez compte rapidement qu'un lissage n'a pas eu lieu, exemple celui du jour si on est toujours le lendemain, vous pouvez aller dans **Réglage des lissages** et cliquez sur le bouton "Lancer immédiatement" en face de Jour. Le lissage par jour se lancera pour toutes les commandes réglées de la veille.
 
 ---
 

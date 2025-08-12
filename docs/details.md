@@ -16,7 +16,7 @@ Il y a aussi la possibilité d'ouvrir un nouveau sujet sur la section du forum J
 Jetez un oeil sur l'onglet résumé de la page **Diagnostic** pour vérifier votre configuration et les commandes gourmandes.  
 Vous retrouvez ici l'état des tables et leur évolution dans le temps. Ainsi qu'un résumé Top15 des commandes occupants le plus de place dans les tables history et historyArch.
 
-Quoi que vous fassiez, il y aura toujours des commandes avec un "volume élevé", c'est normal puisque ce volume est calculé par rapport à la moyenne générale.
+**Quoi que vous fassiez**, il y aura toujours des commandes avec un "volume élevé", c'est normal puisque ce volume est calculé par rapport à la moyenne générale.
 
 Comme partout dans le plugin les tables sont triables en cliquant sur les en-têtes de colonnes.
   
@@ -29,6 +29,9 @@ Réglez les horaires de traitement via Réglage des Lissages, exemples dans la [
 À chaque sauvegarde, les dates de prochaine exécution sont mises à jour afin de contrôler que cela correspond à ce que vous voulez.  
 Prenez en compte votre configuration Jeedom pour éviter les conflits de traitement et les lenteurs.
 
+Le bouton de dérogation permet de lancer un lissage général en dehors des horaires prévus.  
+Par exemple lancer le lissage semaine en milieu de semaine, qui traitera toutes les commandes qui ont un réglage activé pour la semaine. La date retenue pour le calcul des plages est celle du lancement immédiat : si vous lancez le mercredi, les commandes réglées à -1 traiteront de la veille, mardi, au mardi précédent.
+
 ## gestion
 ![gestion](img/gestion.png)
 Commencez par ajouter des commandes, via la **Gestion**, qui seront désormais gérées par le plugin (sauf la purge qui reste gérée par Jeedom)
@@ -40,7 +43,7 @@ Le lien vers la fenêtre de configuration Jeedom ne permet que de modifier la pu
 ![réglage](img/regl.png)
 Ouvrez le **Réglage des commandes** pour configurer chaque commande.
 
-### type
+### type de réglages
 ![cmdr](img/cmdr.png)
 Les commandes de type numérique ont plus de possibilités.
 Retrouvez pour chaque commande ses statistiques dans les 2 tables, les infos de base comme le délai avant la purge. La dernière valeur et sa date, en voir plus avec les 20 dernières valeurs dans chacune des tables. Un menu de navigation entre les commandes.
@@ -65,6 +68,10 @@ Un exemple **complet** de lissage par Année est détaillé dans la [FAQ](faq.md
 Les commandes de type binaire et string sont limitées sur les modes.  
 Valeur la plus proche signifie au plus proche de l'intervalle : s'il est de 5 min on gardera les points à h00 h05 h10... c'est la donnée historisée le plus proche de cette minute qui sera donc conservée.  
 Sauf exception, laissez Jeedom gérer ce type de commande, il le fait très bien.
+
+![cmdb](img/cmdl.png)
+Par dérogation, vous pouvez lancer immédiatement tous les lissages activés sur la page et pour cette commande uniquement. Cela permet, par exemple, de traiter un historique ancien dans la base en lançant avec l'année uniquement à des jours de fin différents.  
+NB: Ce n'est pas possible entre hh:58 et hh:01 afin de ne pas se percuter avec les lissages réguliers.
 
 ⚠️ *Vous aurez toujours des commandes en rouge ou en orange parce qu'il y a forcément des commandes avec plus de données que la moyenne. Cela reste une indication pour comprende quelle commande sont à traiter en priorité.*
 
