@@ -69,7 +69,7 @@ Les commandes de type binaire et string sont limitées sur les modes.
 Valeur la plus proche signifie au plus proche de l'intervalle : s'il est de 5 min on gardera les points à h00 h05 h10... c'est la donnée historisée le plus proche de cette minute qui sera donc conservée.  
 Sauf exception, laissez Jeedom gérer ce type de commande, il le fait très bien.
 
-![cmdb](img/cmdl.png)
+![cmdb](img/cmdl.png)  
 Par dérogation, vous pouvez lancer immédiatement tous les lissages activés sur la page et pour cette commande uniquement. Cela permet, par exemple, de traiter un historique ancien dans la base en lançant avec l'année uniquement à des jours de fin différents.  
 NB: Ce n'est pas possible entre hh:58 et hh:01 afin de ne pas se percuter avec les lissages réguliers.
 
